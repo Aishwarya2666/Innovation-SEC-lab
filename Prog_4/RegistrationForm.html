@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            
+
+            background-image: url('https://img.freepik.com/free-vector/gradient-blur-pink-blue-abstract-background_53876-117324.jpg?semt=ais_hybrid&w=740&q=80');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Form Validation</h2>
+    <form action="">
+         <!--TO VALIDATE NAME-->
+         <label for="">Name</label>
+        <input type="text" id="Name" name="Name">
+        <div id="NameError" class="Error"></div><br><br>
+        <!--TO VAALIDATE PASSWORD-->
+         <label for="">Password</label>
+        <input type="text" id="Password" name="Password">
+        <div id="PhoneError" class="Error"></div><br><br>   
+        <!--TO VALIDATE MAIL-->
+         <label for="">Mail</label>
+        <input type="text" id="Mail" name="Mail">
+        <div id="MailError" class="Error"></div><br><br>      
+        <!--TO VALIDATE PHONE-->
+        <label for="">Phone Number</label>
+        <input type="text" id="Phone" name="Phone" required pattern="[0-9]{10}">
+        <div id="PhoneError" class="Error"></div><br><br>
+        <button type="Submit" onclick="Validationform()">Submit</button>
+        </form>
+        <script>
+            function Validation(name){
+            const regex = /^[a-zA-Z]+$/;
+            if(name.trim()===""){
+                return "Name is required.";
+            }
+            if(!regex.test(name)){
+                return "Name must contain only letters.";
+            }
+        }
+        function PhoneNumberValidation(phoneNumber){
+            const regex = /^[0-9]{10}$/;
+            if(phoneNumber.trim()===""){
+                return "Phone number is required.";
+            }
+            if(!regex.test(phoneNumber)){
+                return "Phone number must be 10 digits.";
+            }
+        }
+        function EmailValidation(email){
+            const regex = /^[^a-zA-Z0-9./+_-]+@[^a-zA-Z]+\.[^a-zA-Z@]+$/;
+            if(email.trim()===""){
+                return "Email is required.";
+            }
+            if(!regex.test(email)){
+                return "Invalid email format.";
+            }
+        }
+        function PasswordValidation(password){
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d){6,}$/;
+            if(password.trim()===""){
+                return "Password is required.";
+            }
+        }
+            function Validationform(){
+                let phoneNumber=document.getElementById("Phone").value;
+                let name=document.getElementById("Name").value;
+                let email=document.getElementById("Mail").value;
+                let password=document.getElementById("Password").value;
+
+                let nameError = Validation(name);
+                let phoneError = PhoneNumberValidation(phoneNumber);                            
+                let emailError = EmailValidation(email);
+                let passwordError = PasswordValidation(password);   
+                
+                if(nameError === "phone num is valid" && phoneError === "phone num is valid" && emailError === "email is valid" && passwordError === "password is valid"){
+                    alert("Form submitted successfully!");
+                    return true; // alow form submission
+                } 
+                    document.getElementById("NameError").innerText === nameError;
+                    document.getElementById("PhoneError").innerText === phoneError; 
+                    document.getElementById("MailError").innerText === emailError; 
+                    document.getElementById("PasswordError").innerText === passwordError;
+                }
+
+            
+
+
+
+        </script>
+</body>
+</html>

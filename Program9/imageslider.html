@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Image Slider</title>
+  <style>
+    .slider {
+      text-align: center;
+      position: relative;
+      width: 60%;
+      margin: auto;
+    }
+    .slider img {
+      width: 100%;
+      height: auto;
+    }
+    .slider button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #prev {
+      left: 0;
+    }
+    #next {
+      right: 0;
+    }
+    .number-display {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider">
+
+    <img id="sliderImage" src="imag1.jpg" alt="slider image" />
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+  </div>
+
+  <script>
+    let images = ["imag1.jpg", "imag 2.jpg", "imag 3.jpg", "imag 4.jpg"];
+    let currentIndex = 0;
+
+    const numberBox = document.getElementById("numberBox");
+    const sliderImage = document.getElementById("sliderImage");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+
+    function updateSlider() {
+      sliderImage.src = images[currentIndex];
+      numberBox.textContent = currentIndex + 1;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateSlider();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateSlider();
+    });
+
+    //Optional: auto slide every 2 seconds
+    /*
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateSlider();
+    }, 2000);
+    */
+  </script>
+</body>
+</html>
